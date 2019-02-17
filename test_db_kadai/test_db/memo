@@ -1,0 +1,175 @@
+<?php
+try {
+    $pdo = new PDO('mysql:dbname=test_db;charset=utf8;host=localhost','root','');
+    } catch (PDOException $e) {
+      exit('データベースに接続できませんでした。'.$e->getMessage());
+    }
+    
+    //２．データ登録SQL作成
+    //作ったテーブル名を書く場所  xxxにテーブル名を入れます
+    $stmt = $pdo->prepare("SELECT * FROM test_table");
+    $status = $stmt->execute();
+
+    //３．データ表示 
+    $view="";
+    if($status==false){
+      //execute（SQL実行時にエラーがある場合）
+      $error = $stmt->errorInfo();
+      exit("ErrorQuery:".$error[2]);
+    }else{
+      //Selectデータの数だけ自動でループしてくれる $resultの中に「カラム名」が入ってくるのでそれを表示させる例
+      while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
+        $view .= "<p>";
+        $view .= $result["id"]." : ".$result["name"]." : ".$result["q1"]." : ".$result["q2"]." : ".$result["q3"]." : ".$result["score"];
+        $view .= "</p>";
+        // $id = $result["id"];
+        // $name = $result["name"];
+        // $q1 = $result["q1"];
+        // $q2 = $result["q2"];
+        // $q3 = $result["q3"];
+        // $score = $result["score"];
+
+
+      }
+    }
+    
+// echo $view;
+// $score1 = 0; 
+// $score2 = 0; 
+// $score3 = 0; 
+
+// if($q1 == "q1_1"){
+//     $result1 = "正解";
+//     $score1 =+1;
+//    }
+ 
+//    if($q2 == "q2_1"){
+//     $result2 = "正解";
+//     $score2 =+1;
+//    }
+//    if($q3 == "q3_1"){
+//     $result3 = "正解";
+//     $score3 =+1;
+//    }
+ 
+
+//  $score = $score1 + $score2 + $score3;
+?>
+<!DOCTYPE html>
+    <html lang="ja">
+      <head>
+        <meta charset="UTF-8">
+        <title>結果</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <style>div{padding: 10px;font-size:16px;}</style>
+      </head>
+    <body>  
+      <div class="flexscore">
+        <div class="box5">
+          <p>受験番号：<?php echo $id;?>
+          </p>
+          <p>名前：<?php echo $name;?>
+          </p>
+          <p>得点：<?php echo $score;?>
+          </p>
+            <br>
+          <div class="testresult">
+            <p><?php
+              if($score > 2){
+              echo "合格";
+              }else{
+              echo "不合格"; 
+              }
+              ?>
+            </p>
+          </div>
+        </div>
+        </div>
+</body>
+</html>
+
+<td class="table01" align="center" valign="middle" background="">
+						<div align="center">
+							<table width="980" border="0" cellspacing="0" cellpadding="0">
+								<tbody><tr>
+									<td class="text09" align="center" valign="middle" width="15%"><div align="center"><a href="">各種試験のご案内</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="">試験日・受験料</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="">メリット</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="">日検の特徴</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="">問題集</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="">日検の概要</a></div></td>
+									<td class="text10" align="center" valign="middle" width="15%"><div align="center"><a href="">Q &amp; A</a></div></td>
+								</tr>
+							</tbody></table>
+						</div>
+                    </td>
+                    
+
+                    <div align="center"><a href="q_and_a.html">Q &amp; A</a></div>
+
+
+                    <div id="menu">
+		<div align="center">
+			<table border="0" cellspacing="0" cellpadding="0" height="50">
+				<tbody><tr>
+					<td class="table01" align="center" valign="middle" background="images/back03.svg">
+						<div align="center">
+							<table width="980" border="0" cellspacing="0" cellpadding="0">
+								<tbody><tr>
+									<td class="text09" align="center" valign="middle" width="15%"><div align="center"><a href="test_info.html">各種試験のご案内</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="info.html">試験日・受験料</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="merit.html">メリット</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="feature.html">日検の特徴</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="text.html">問題集</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="about_nk.html">日検の概要</a></div></td>
+									<td class="text10" align="center" valign="middle" width="15%"><div align="center"><a href="q_and_a.html">Q &amp; A</a></div></td>
+								</tr>
+							</tbody></table>
+						</div>
+					</td>
+				</tr>
+			</tbody></table>
+		</div>
+    </div>
+    
+    <table border="0" cellspacing="0" cellpadding="0" height="50">
+				<tbody><tr>
+					<td class="table01" align="center" valign="middle" background="images/back03.svg">
+						<div align="center">
+							<table width="980" border="0" cellspacing="0" cellpadding="0">
+								<tbody><tr>
+									<td class="text09" align="center" valign="middle" width="15%"><div align="center"><a href="test_info.html">各種試験のご案内</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="info.html">試験日・受験料</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="merit.html">メリット</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="feature.html">日検の特徴</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="text.html">問題集</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="about_nk.html">日検の概要</a></div></td>
+									<td class="text10" align="center" valign="middle" width="15%"><div align="center"><a href="q_and_a.html">Q &amp; A</a></div></td>
+								</tr>
+							</tbody></table>
+						</div>
+					</td>
+				</tr>
+            </tbody></table>
+            
+            <!-- <table>  -->
+				<tbody><tr>
+    <td class="table01" align="center" valign="middle" background="">
+						<div align="center">
+							<table width="980" border="0" cellspacing="0" cellpadding="0">
+								<tbody><tr>
+									<td class="text09" align="center" valign="middle" width="15%"><div align="center"><a href="">各種試験のご案内</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="">試験日・受験料</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="">メリット</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="">日検の特徴</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="">問題集</a></div></td>
+									<td class="text09" align="center" valign="middle" width="14%"><div align="center"><a href="">日検の概要</a></div></td>
+									<td class="text10" align="center" valign="middle" width="15%"><div align="center"><a href="">Q &amp; A</a></div></td>
+								</tr>
+              </tbody></table> 
+              <!-- table周り要修正 -->
+						</div>
+          </td>
+          
+
+          
